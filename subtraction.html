@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Subtraction</title>
+
+		<style>
+			.button {
+			    background-color: #4CAF50;
+			    border: none;
+			    color: white;
+			    padding: 15px 32px;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    font-size: 30px;
+			    margin: 2px 2px;
+			    cursor: pointer;
+			    width: 250px;
+			}
+
+			.iptag {
+			    /*background-color: #4CAF50;*/
+			    border: 2;
+			    color: black;
+			    padding: 15px 32px;
+			    text-align: center;
+			    text-decoration: none;
+			    display: inline-block;
+			    font-size: 30px;
+			    margin: 2px 2px;
+			    cursor: pointer;
+			    width: 250px;
+			}
+</style>
+</head>
+<body background="addition_img.jpg" style="background-size: 100%;">
+
+<center><a onclick="myFunction()" class="button" id="start_game" style="margin-top: 250px">Start Game</a></center>
+
+<center>
+	<table>
+		<tr>
+      <td id="circle_filled" style="width: 50px; display: none"><img src="Filled.png" style="width: 50px"></td>
+      <td id="circle_empty" style="width: 50px; display: none"><img src="Empty.png" style="width: 50px"></td>
+      <td style="text-align: center;"><a id="number1" style="font-size: 100px;"></a></td>
+			<td><a id="sign" style="font-size: 100px; display: none">-</a></td>
+      <td style="text-align: center;"><a id="number2" style="font-size: 100px;"></a></td>
+		</tr>
+    <tr>
+      <td>
+        <table>
+          <tr id = "circles1">
+          </tr>
+        </table>
+      </td>
+      <td></td>
+      <td>
+        <table>
+          <tr id = "circles2">
+          </tr>
+        </table>
+      </td>
+    </tr>
+	</table>
+</center>
+<center>
+	<table>
+		<tr>
+			<td><a id="option1" style="font-size: 50px; display: none;" class="button"></a><td>
+			<td><a id="option2" style="font-size: 50px; display: none;" class="button"></a><td>
+			<td><a id="option3" style="font-size: 50px; display: none;" class="button"></a></td>
+			<td><a id="option4" style="font-size: 50px; display: none;" class="button"></a></td>
+		</tr>
+	</table>	
+
+  <br><br><br><br><br><br><br><br><br><br><br>
+<a href="index.html" id="new" style="font-size: 30px; display: none;" class="button">Go To Home</a>
+</center>
+
+<script>
+function myFunction() {
+    var snd = new Audio("clap.wav");
+    document.getElementById("option1").style.display = 'block';    
+    document.getElementById("option2").style.display = 'block';
+    document.getElementById("option3").style.display = 'block';
+    document.getElementById("option4").style.display = 'block';
+    document.getElementById("start_game").style.display = 'none';
+
+    document.getElementById("new").style.display = 'block';
+
+    document.getElementById("circles1").innerHTML = '';
+    document.getElementById("circles2").innerHTML = '';
+    var x=0,y=9;
+    while(x<=y){
+      var x = Math.floor((Math.random() * 9) +1);
+      var y = Math.floor((Math.random() * 9) +1);
+    }
+    document.getElementById("number1").innerHTML = x;
+    document.getElementById("number2").innerHTML = y;
+    document.getElementById("sign").style.display = 'block';
+    var z = x - y;
+
+    for(i = 0; i < x ; i++) {
+      var circle = document.getElementById("circle_filled");
+      var circle_clone = circle.cloneNode(true);
+      circle_clone.id = "circle_1_"+i;
+      circle_clone.style.display = 'table-cell';
+      document.getElementById("circles1").appendChild(circle_clone);
+    }
+    for(i = 0; i < y ; i++) {
+      var circle = document.getElementById("circle_empty");
+      var circle_clone = circle.cloneNode(true);
+      circle_clone.id = "circle_2_"+i;
+      circle_clone.style.display = 'table-cell';
+      document.getElementById("circles2").appendChild(circle_clone);
+    }
+
+    var a = [z,Math.floor((Math.random() * 18) +1),Math.floor((Math.random() * 18) +1),Math.floor((Math.random() * 18) +1)];
+    for (var i = 1; i < 4; i++) {
+      for (var j = 0; j < i; j++) {
+        if(a[i]==a[j]) {
+          a[i] = Math.floor((Math.random() * 18) +1);
+          j=-1;
+        }
+      }
+    }
+    option1 = a[1];
+    option2 = a[2];
+    option3 = a[3];
+
+  	var optionchoser = Math.floor((Math.random() * 4) +1);
+
+  	if(optionchoser==1){
+  		document.getElementById("option1").innerHTML = z;
+    	document.getElementById("option2").innerHTML = option1;
+    	document.getElementById("option3").innerHTML = option2;
+    	document.getElementById("option4").innerHTML = option3;
+
+    	document.getElementById("option1").onclick = function(){alert('Correct Answer! Please press enter to continue.'); snd.play(); myFunction();}
+    	document.getElementById("option2").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option3").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option4").onclick = function(){alert('Incorrect Answer');}
+  	}
+  	else if(optionchoser==2){
+  		document.getElementById("option1").innerHTML = option1;
+    	document.getElementById("option2").innerHTML = z;
+    	document.getElementById("option3").innerHTML = option2;
+    	document.getElementById("option4").innerHTML = option3;
+
+    	document.getElementById("option2").onclick = function(){alert('Correct Answer! Please press enter to continue.'); snd.play(); myFunction();}
+    	document.getElementById("option1").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option3").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option4").onclick = function(){alert('Incorrect Answer');}
+  	}
+  	else if(optionchoser==3){
+  		document.getElementById("option1").innerHTML = option1;
+    	document.getElementById("option2").innerHTML = option2;
+    	document.getElementById("option3").innerHTML = z;
+    	document.getElementById("option4").innerHTML = option3;
+
+    	document.getElementById("option3").onclick = function(){alert('Correct Answer! Please press enter to continue.'); snd.play(); myFunction();}
+    	document.getElementById("option1").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option2").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option4").onclick = function(){alert('Incorrect Answer');}
+  	}
+  	else if(optionchoser==4){
+  		document.getElementById("option1").innerHTML = option1;
+    	document.getElementById("option2").innerHTML = option2;
+    	document.getElementById("option3").innerHTML = option3;
+    	document.getElementById("option4").innerHTML = z;
+
+    	document.getElementById("option4").onclick = function(){alert('Correct Answer! Please press enter to continue.'); snd.play(); myFunction();}
+    	document.getElementById("option1").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option2").onclick = function(){alert('Incorrect Answer');}
+    	document.getElementById("option3").onclick = function(){alert('Incorrect Answer');}
+  	}
+
+}
+</script>
+
+</body>
+</html>
